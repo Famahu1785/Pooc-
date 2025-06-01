@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/Cuenta.h
+string
+-
+
+../include/Persona.h
+Cuenta.h
+../include/Cuenta.h
+string
+-
+
+/workspaces/codespaces-blank/punteros_50/main.cpp
+iostream
+-
+Cuenta.h
+/workspaces/codespaces-blank/punteros_50/Cuenta.h
+Persona.h
+/workspaces/codespaces-blank/punteros_50/Persona.h
+
+/workspaces/codespaces-blank/punteros_50/src/Cuenta.cpp
+Cuenta.h
+/workspaces/codespaces-blank/punteros_50/src/Cuenta.h
+
+/workspaces/codespaces-blank/punteros_50/src/Persona.cpp
+Persona.h
+/workspaces/codespaces-blank/punteros_50/src/Persona.h
+

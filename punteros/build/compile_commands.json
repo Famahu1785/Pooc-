@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/workspaces/codespaces-blank/punteros_50/build",
+  "command": "/usr/bin/g++   -I/workspaces/codespaces-blank/punteros_50/include  -g   -o CMakeFiles/punteros_50.dir/main.cpp.o -c /workspaces/codespaces-blank/punteros_50/main.cpp",
+  "file": "/workspaces/codespaces-blank/punteros_50/main.cpp"
+},
+{
+  "directory": "/workspaces/codespaces-blank/punteros_50/build",
+  "command": "/usr/bin/g++   -I/workspaces/codespaces-blank/punteros_50/include  -g   -o CMakeFiles/punteros_50.dir/src/Cuenta.cpp.o -c /workspaces/codespaces-blank/punteros_50/src/Cuenta.cpp",
+  "file": "/workspaces/codespaces-blank/punteros_50/src/Cuenta.cpp"
+},
+{
+  "directory": "/workspaces/codespaces-blank/punteros_50/build",
+  "command": "/usr/bin/g++   -I/workspaces/codespaces-blank/punteros_50/include  -g   -o CMakeFiles/punteros_50.dir/src/Persona.cpp.o -c /workspaces/codespaces-blank/punteros_50/src/Persona.cpp",
+  "file": "/workspaces/codespaces-blank/punteros_50/src/Persona.cpp"
+}
+]

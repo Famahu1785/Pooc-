@@ -1,0 +1,60 @@
+{
+    "folders": [
+      {
+        "name": "Polimorfismo",
+        "path": "polimorfismo"
+      },
+      {
+        "name": "Taller_vector",
+        "path": "taller_vector"
+      },
+      {
+        "name": "Intersedes",
+        "path": "intersedes"
+      },
+      {
+        "name": "Punteros",
+        "path": "punteros"
+      }
+      {
+        "name": "NotasArchivo",
+        "path": "notasArchivo"
+      }
+      {
+        "name": "TallerLibreria",
+        "path": "tallerLibreria"
+      }
+      {
+        "name": "ProyectoFin",
+        "path": "proyectoFin"
+      }
+    ],
+    "settings": {
+      // para que CMake Tools busque en la raíz
+      "cmake.sourceDirectory": "${workspaceFolder}"
+    },
+    "extensions": {
+      "recommendations": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools"
+      ]
+    }
+}
+
+
+// {
+//   "folders": [
+//     { "name": <nombre carpeta mayuscula>,   "path": <nombre carpeta> },
+//     {por cada proyecto}
+//   ],
+//   "settings": {
+//     // para que CMake Tools busque en la raíz
+//     "cmake.sourceDirectory": "${workspaceFolder}"
+//   },
+//   "extensions": {
+//     "recommendations": [
+//       "ms-vscode.cpptools",
+//       "ms-vscode.cmake-tools"
+//     ]
+//   }
+// }

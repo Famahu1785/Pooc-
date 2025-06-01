@@ -1,0 +1,1 @@
+/usr/bin/g++  -g   CMakeFiles/punteros_50.dir/main.cpp.o CMakeFiles/punteros_50.dir/src/Cuenta.cpp.o CMakeFiles/punteros_50.dir/src/Persona.cpp.o  -o punteros_50 

@@ -1,0 +1,3 @@
+/workspaces/codespaces-blank/punteros_50/build/CMakeFiles/rebuild_cache.dir
+/workspaces/codespaces-blank/punteros_50/build/CMakeFiles/edit_cache.dir
+/workspaces/codespaces-blank/punteros_50/build/CMakeFiles/punteros_50.dir
