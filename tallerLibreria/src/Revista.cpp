@@ -2,12 +2,17 @@
 #include <iostream>
 using namespace std;
 
-Revista::Revista(string i, string n, string t, int e)
-    : Material(n, t), id(i), tematica(t), edicion(e) {}
-
+Revista::Revista(string i, string n, string t, int e) : Material(n, t) {
+    id  = i; // este constructor inicializa el material base
+    tematica = t;
+    edicion = e;
+    // Validar que el ID no esté vacío y que la edición sea un número positivo
+}
 void Revista::mostrar() {
-    cout << "REVISTA | ID: " << id << " | Nombre: " << titulo << " | Temática: " << tematica
-         << " | Edición: " << edicion << endl;
+    cout << "REVISTA | ID: " << id 
+    << " | Nombre: " << titulo 
+    << " | Temática: " << tematica
+    << " | Edición: " << edicion << endl;
 }
 
 string Revista::getID() {

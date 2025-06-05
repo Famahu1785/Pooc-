@@ -4,75 +4,76 @@
 #include "/workspaces/Pooc-/tallerLibreria/include/Libreria.h"
 
 int main() {
-    Libreria biblioteca; // Creamos el objeto de la biblioteca
+    Libreria biblioteca; // se crea el objeto de la biblioteca
     int opcion = 0;
-    std::string usuario, idMaterial;
+    string usuario, idMaterial; // se esta declarando las variables para el usuario y el id del material (codigo)
 
-    // Menú principal
+    // este es el menú principal (entrada)
     while (opcion != 4) {
-        std::cout << "\n1. Mostrar materiales\n";
-        std::cout << "2. Prestar material\n";
-        std::cout << "3. Devolver material\n";
-        std::cout << "4. Salir\n";
-        std::cout << "Elige una opción: ";
+        cout << "\n1. Mostrar materiales\n";
+        cout << "2. Prestar material\n";
+        cout << "3. Devolver material\n";
+        cout << "4. Salir\n";
+        cout << "Elige una opción: ";
 
         // Validar entrada de opción
-        if (!(std::cin >> opcion)) {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Por favor ingresa un número válido.\n";
+        if (!(cin >> opcion)) {
+            cin.clear(); // limpiar el estado de error
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // se utilizo eel vector de streamsize para limpiar el buffer
+            cout << "Por favor ingresa un número válido.\n";
             continue;
         }
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Limpiar buffer
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpiar buffer
 
         switch (opcion) {
             case 1:
-                // Mostrar todos los materiales disponibles
+                // Mostrar todos los materiales disponibles (mostrar todo "Libros", "Revistas", "DvDs")
                 biblioteca.mostrarMateriales();
                 break;
             case 2: {
-                // Solicitar nombre del usuario
-                std::cout << "Ingresa tu nombre: ";
-                std::getline(std::cin, usuario);
+                //Se socilita el nombre del usuario para empezar
+                cout << "Ingresa tu nombre: ";
+                getline(cin, usuario);
 
-                // Verificar cuántos materiales tiene prestados el usuario
+                // Verificar cuántos materiales tiene prestados el usuario para ver si se le puede prestar más
                 int prestados = biblioteca.prestamosDeUsuario(usuario);
-                int disponibles = 3 - prestados;
-                if (disponibles <= 0) {
-                    std::cout << "Ya tienes el máximo de materiales prestados (3).\n";
+                int disponibles = 3 - prestados; // máximo 3 materiales prestados
+                if (disponibles <= 0) { // se utiliza este if para validar que el usuario no tenga más de 3 materiales prestados
+                    cout << "Ya tienes el máximo de materiales prestados (3).\n";
                     break;
                 }
 
                 int cuantos = 0;
-                std::cout << "¿Cuántos materiales quieres llevar? (máximo " << disponibles << "): ";
-                std::cin >> cuantos;
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                if (cuantos < 1 || cuantos > disponibles) {
-                    std::cout << "Cantidad no permitida.\n";
+                cout << "¿Cuántos materiales quieres llevar? (máximo " << disponibles << "): ";
+                cin >> cuantos;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                if (cuantos < 1 || cuantos > disponibles) { // se valida que el usuario no ingrese un número menor a 1 o mayor a 3
+                    cout << "Cantidad no permitida.\n";
                     break;
                 }
 
                 // Pedir los IDs de los materiales a prestar
                 for (int i = 0; i < cuantos; i++) {
-                    std::cout << "ID del material #" << (i + 1) << ": ";
-                    std::getline(std::cin, idMaterial);
+                    cout << "ID del material #" << (i + 1) << ": "; // se solicita el id del material
+                    // Limpiar buffer antes de leer el ID
+                    getline(cin, idMaterial);
                     biblioteca.prestarMaterial(usuario, idMaterial);
                 }
                 break;
             }
             case 3:
-                // Devolver material
-                std::cout << "Ingresa tu nombre: ";
-                std::getline(std::cin, usuario);
-                std::cout << "ID del material a devolver: ";
-                std::getline(std::cin, idMaterial);
+                cout << "Ingresa tu nombre: ";
+                getline(cin, usuario); // se solicita el nombre del usuario para devolver el material
+                cout << "ID del material a devolver: ";
+                getline(cin, idMaterial); // se solicita el id del material a devolver
+                // Validar que el usuario tenga el material prestado
                 biblioteca.devolverMaterial(usuario, idMaterial);
                 break;
             case 4:
-                std::cout << "Hasta luego!\n";
+                cout << "Hasta luego!\n";
                 break;
             default:
-                std::cout << "Opción no válida. Intenta de nuevo.\n";
+                cout << "Opción no válida. Intenta de nuevo.\n";
         }
     }
 

@@ -8,15 +8,15 @@ using std::vector;
 
 class Usuario {
     string nombre;
-    vector<Material*> prestamos;
+    vector<Material*> prestamos; // se utiliza el vector asi para almacenar los materiales prestados
 
 public:
-    Usuario(string n);
-    bool prestar(Material* m);
-    bool devolver(string id); // Cambiado: ahora devuelve bool
-    void mostrarPrestamos();
-    int cantidadPrestamos() const;
-    string getNombre() const;
+    Usuario(string n); // Constructor que recibe el nombre del usuario
+    bool prestar(Material* m); // Método para prestar un material usando un puntero a Material
+    bool devolver(string id); // Método para devolver un material por su ID
+    void mostrarPrestamos(); 
+    int cantidadPrestamos() const; // se utiliza const para indicar que no modifica el estado del objeto
+    string getNombre() const; // Método para obtener el nombre del usuario
 };
 
 #endif
