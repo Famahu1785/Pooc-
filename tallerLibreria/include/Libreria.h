@@ -1,32 +1,40 @@
 #ifndef LIBRERIA_H
 #define LIBRERIA_H
 
+#include "Libro.h"
+#include "Revista.h"
+#include "Dvd.h"
+#include "Usuario.h"
+#include <vector>
 #include <string>
-#include <iostream>
+#include <fstream>
 
-// Clase base abstracta para representar un elemento de la librería
 class Libreria {
-protected:
-    std::string titulo;
-    std::string genero;
-    bool disponible;
+private:
+    // Vector de punteros a Material (puede ser Libro, Revista o Dvd)
+    std::vector<Material*> materiales;
+    // Vector de usuarios registrados en la biblioteca
+    std::vector<Usuario> usuarios;
 
 public:
-    // Constructor
-    Libreria(const std::string& titulo, const std::string& genero, bool disponible = true);
+    // Constructor de la clase Libreria
+    Libreria();
+    // Destructor de la clase Libreria
+    ~Libreria(); // el ~ indica que es un destructor 
 
-    // Destructor virtual
-    virtual ~Libreria();
+    // Carga los datos de materiales y usuarios desde archivos
+    void cargarDatos();
+    // Permite a un usuario prestar un material por su ID
+    void prestarMaterial(const std::string& usuario, const std::string& id);
+    // Permite a un usuario devolver un material por su ID
+    void devolverMaterial(const std::string& usuario, const std::string& id);
+    // Muestra todos los materiales disponibles en la biblioteca
+    void mostrarMateriales();
+    // Registra una operación (préstamo o devolución) en un archivo de registro
+    void registrarOperacion(const std::string& tipo, const std::string& usuario, const std::string& id);
 
-    // Método virtual puro: debe implementarse en clases derivadas
-    virtual void mostrarInfo() const = 0;
-
-    // Métodos para acceder y modificar los atributos
-    bool getDisponible() const;
-    void setDisponible(bool estado);
-
-    std::string getTitulo() const;
-    std::string getGenero() const;
+    // Devuelve la cantidad de préstamos que tiene un usuario
+    int prestamosDeUsuario(const std::string& nombre) const;
 };
 
-#endif // LIBRERIA_H
+#endif

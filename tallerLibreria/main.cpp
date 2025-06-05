@@ -1,134 +1,80 @@
-
 #include <iostream>
-#include <fstream>
-#include <vector>
+#include <string>
+#include <limits>
 #include "/workspaces/Pooc-/tallerLibreria/include/Libreria.h"
-#include "/workspaces/Pooc-/tallerLibreria/include/Libro.h"
-#include "/workspaces/Pooc-/tallerLibreria/include/Revista.h"
-#include "/workspaces/Pooc-/tallerLibreria/include/Dvd.h"
-#include "/workspaces/Pooc-/tallerLibreria/include/Usuario.h"
-
-using namespace std;
-
-void cargarLibros(vector<Libreria*>& materiales) {
-    ifstream archivo("libros.txt");
-    string linea;
-    while (getline(archivo, linea)) {
-        size_t pos = 0;
-        string campos[5];
-        for (int i = 0; i < 4; ++i) {
-            size_t sig = linea.find("-", pos);
-            campos[i] = linea.substr(pos, sig - pos);
-            pos = sig + 2;
-        }
-        campos[4] = linea.substr(pos);
-        materiales.push_back(new Libro(campos[0], campos[1], campos[3], campos[2], stoi(campos[4])));
-    }
-    archivo.close();
-}
-
-void cargarRevistas(vector<Libreria*>& materiales) {
-    ifstream archivo("Revistas.txt");
-    string linea;
-    while (getline(archivo, linea)) {
-        size_t pos = 0;
-        string campos[4];
-        for (int i = 0; i < 3; ++i) {
-            size_t sig = linea.find("-", pos);
-            campos[i] = linea.substr(pos, sig - pos);
-            pos = sig + 2;
-        }
-        campos[3] = linea.substr(pos);
-        materiales.push_back(new Revista(campos[0], campos[1], campos[2], stoi(campos[3]), ""));
-    }
-    archivo.close();
-}
-
-void cargarDVDs(vector<Libreria*>& materiales) {
-    ifstream archivo("DVDs.txt");
-    string linea;
-    while (getline(archivo, linea)) {
-        size_t pos = 0;
-        string campos[5];
-        for (int i = 0; i < 4; ++i) {
-            size_t sig = linea.find("-", pos);
-            campos[i] = linea.substr(pos, sig - pos);
-            pos = sig + 2;
-        }
-        campos[4] = linea.substr(pos);
-        materiales.push_back(new DVD(campos[0], campos[1], campos[2], campos[3], stoi(campos[4])));
-    }
-    archivo.close();
-}
-
-void mostrarMaterialesDisponibles(const vector<Libreria*>& materiales) {
-    for (size_t i = 0; i < materiales.size(); ++i) {
-        if (materiales[i]->getDisponible()) {
-            cout << i + 1 << ". ";
-            materiales[i]->mostrarInfo();
-        }
-    }
-}
 
 int main() {
-    vector<Libreria*> materiales;
-    cargarLibros(materiales);
-    cargarRevistas(materiales);
-    cargarDVDs(materiales);
+    Libreria biblioteca; // Creamos el objeto de la biblioteca
+    int opcion = 0;
+    std::string usuario, idMaterial;
 
-    string nombre;
-    cout << "Ingrese su nombre: ";
-    getline(cin, nombre);
-    Usuario usuario(nombre);
+    // Menú principal
+    while (opcion != 4) {
+        std::cout << "\n1. Mostrar materiales\n";
+        std::cout << "2. Prestar material\n";
+        std::cout << "3. Devolver material\n";
+        std::cout << "4. Salir\n";
+        std::cout << "Elige una opción: ";
 
-    int opcion;
-    do {
-        cout << "\n--- MENU BIBLIOTECA ---\n";
-        cout << "1. Ver materiales disponibles\n";
-        cout << "2. Prestar material\n";
-        cout << "3. Ver mis préstamos\n";
-        cout << "4. Devolver material\n";
-        cout << "5. Salir\n";
-        cout << "Opción: ";
-        cin >> opcion;
-        cin.ignore();
+        // Validar entrada de opción
+        if (!(std::cin >> opcion)) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Por favor ingresa un número válido.\n";
+            continue;
+        }
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Limpiar buffer
 
         switch (opcion) {
             case 1:
-                mostrarMaterialesDisponibles(materiales);
+                // Mostrar todos los materiales disponibles
+                biblioteca.mostrarMateriales();
                 break;
-            case 2:
-                if (!usuario.puedePrestar()) {
-                    cout << "\n[!] Ya tienes 3 materiales prestados.\n";
+            case 2: {
+                // Solicitar nombre del usuario
+                std::cout << "Ingresa tu nombre: ";
+                std::getline(std::cin, usuario);
+
+                // Verificar cuántos materiales tiene prestados el usuario
+                int prestados = biblioteca.prestamosDeUsuario(usuario);
+                int disponibles = 3 - prestados;
+                if (disponibles <= 0) {
+                    std::cout << "Ya tienes el máximo de materiales prestados (3).\n";
                     break;
                 }
-                mostrarMaterialesDisponibles(materiales);
-                cout << "Seleccione el número del material a prestar: ";
-                int n;
-                cin >> n;
-                if (n >= 1 && n <= static_cast<int>(materiales.size()))
-                    usuario.prestar(materiales[n - 1]);
-                else
-                    cout << "Opción inválida.\n";
+
+                int cuantos = 0;
+                std::cout << "¿Cuántos materiales quieres llevar? (máximo " << disponibles << "): ";
+                std::cin >> cuantos;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                if (cuantos < 1 || cuantos > disponibles) {
+                    std::cout << "Cantidad no permitida.\n";
+                    break;
+                }
+
+                // Pedir los IDs de los materiales a prestar
+                for (int i = 0; i < cuantos; i++) {
+                    std::cout << "ID del material #" << (i + 1) << ": ";
+                    std::getline(std::cin, idMaterial);
+                    biblioteca.prestarMaterial(usuario, idMaterial);
+                }
                 break;
+            }
             case 3:
-                usuario.mostrarPrestamos();
+                // Devolver material
+                std::cout << "Ingresa tu nombre: ";
+                std::getline(std::cin, usuario);
+                std::cout << "ID del material a devolver: ";
+                std::getline(std::cin, idMaterial);
+                biblioteca.devolverMaterial(usuario, idMaterial);
                 break;
             case 4:
-                usuario.mostrarPrestamos();
-                cout << "Seleccione el número del material a devolver: ";
-                int d;
-                cin >> d;
-                usuario.devolver(d - 1);
-                break;
-            case 5:
-                cout << "Saliendo del sistema...\n";
+                std::cout << "Hasta luego!\n";
                 break;
             default:
-                cout << "Opción inválida.\n";
+                std::cout << "Opción no válida. Intenta de nuevo.\n";
         }
-    } while (opcion != 5);
+    }
 
-    for (auto m : materiales) delete m;
     return 0;
 }

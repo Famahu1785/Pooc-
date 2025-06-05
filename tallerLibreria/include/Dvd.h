@@ -1,27 +1,17 @@
 #ifndef DVD_H
 #define DVD_H
+#include "Material.h"
 
-#include "Libreria.h"
-#include <string>
-
-// Clase que representa un DVD en la librería
-class DVD : public Libreria {
-private:
-    std::string id;
-    std::string director;
+class Dvd : public Material {
+    string id, director;
     int duracion;
 
 public:
-    // Constructor del DVD
-    DVD(const std::string& id,
-        const std::string& titulo,
-        const std::string& genero,
-        const std::string& director,
-        int duracion,
-        bool disponible = true);
-
-    // Muestra la información del DVD (override del método virtual de Libreria)
-    void mostrarInfo() const override;
+    Dvd(string i, string t, string g, string d, int dur);
+    void mostrar() override; // El metodo override indica que estamos sobreescribiendo un metodo virtual de la clase base
+    // En este caso, el metodo mostrar() de la clase Material
+    string getID() override;
 };
 
-#endif // DVD_H
+#endif
+

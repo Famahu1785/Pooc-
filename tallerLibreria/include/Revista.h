@@ -1,25 +1,16 @@
 #ifndef REVISTA_H
 #define REVISTA_H
+#include "Material.h"
 
-#include "Libreria.h"
-#include <string>
-#include <iostream>
-
-// Clase que representa una revista en la librería
-class Revista : public Libreria {
-private:
-    std::string id;
-    std::string tematica;
+class Revista : public Material {
+    string id, tematica;
     int edicion;
 
 public:
-    // Constructor
-    Revista(const std::string& id, const std::string& nombre, const std::string& tematica,
-            int edicion, const std::string& genero, bool disponible = true);
-
-    // Muestra la información de la revista
-    void mostrarInfo() const override;
+    Revista(string i, string n, string t, int e);
+    void mostrar() override;
+    string getID() override;
 };
 
-#endif // REVISTA_H
+#endif
 

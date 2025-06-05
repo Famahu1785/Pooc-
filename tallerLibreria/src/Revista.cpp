@@ -1,16 +1,17 @@
 #include "/workspaces/Pooc-/tallerLibreria/include/Revista.h"
+#include <iostream>
+using namespace std;
 
-// Constructor
-Revista::Revista(const std::string& id, const std::string& nombre, const std::string& tematica,
-                 int edicion, const std::string& genero, bool disponible)
-    : Libreria(nombre, genero, disponible), id(id), tematica(tematica), edicion(edicion) {}
+Revista::Revista(string i, string n, string t, int e)
+    : Material(n, t), id(i), tematica(t), edicion(e) {}
 
-// Método para mostrar la información de la revista
-void Revista::mostrarInfo() const {
-    std::cout << "[REVISTA] ID: " << id << "\n"
-              << "  Nombre: " << titulo << "\n"
-              << "  Temática: " << tematica << "\n"
-              << "  Edición: " << edicion << "\n"
-              << "  Género: " << genero << "\n"
-              << "  Disponible: " << (disponible ? "Sí" : "No") << std::endl;
+void Revista::mostrar() {
+    cout << "REVISTA | ID: " << id << " | Nombre: " << titulo << " | Temática: " << tematica
+         << " | Edición: " << edicion << endl;
 }
+
+string Revista::getID() {
+    return id;
+}
+
+

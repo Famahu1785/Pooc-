@@ -1,20 +1,15 @@
 #include "/workspaces/Pooc-/tallerLibreria/include/Dvd.h"
 #include <iostream>
+using namespace std;
 
-DVD::DVD(const std::string& id, const std::string& titulo, const std::string& genero,
-         const std::string& director, int duracion, bool disponible)
-    : Libreria(titulo, genero, disponible), 
-      id(id), 
-      director(director), 
-      duracion(duracion) 
-{
+Dvd::Dvd(string i, string t, string g, string d, int dur)
+    : Material(t, g), id(i), director(d), duracion(dur) {}
+
+void Dvd::mostrar() {
+    cout << "DVD | ID: " << id << " | Título: " << titulo << " | Director: " << director
+         << " | Género: " << genero << " | Duración: " << duracion << " min" << endl;
 }
 
-void DVD::mostrarInfo() const {
-    std::cout << "[DVD] ID: " << id << "\n"
-              << "  Título: " << titulo << "\n"
-              << "  Director: " << director << "\n"
-              << "  Género: " << genero << "\n"
-              << "  Duración: " << duracion << " min\n"
-              << "  Disponible: " << (disponible ? "Sí" : "No") << std::endl;
+string Dvd::getID() {
+    return id;
 }
