@@ -88,5 +88,17 @@
         "miDebuggerPath": "/usr/bin/gdb",
         "preLaunchTask": "Build <nombre proyecto>"
       },
+      {
+        "name": "Debug ParcialII",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/build/bin/parcialII",
+        "args": [],
+        "cwd": "${workspaceFolder}",
+        "console": "integratedTerminal",
+        "MIMode": "gdb",
+        "miDebuggerPath": "/usr/bin/gdb",
+        "preLaunchTask": "Build <nombre proyecto>"
+      },
     ]
   }

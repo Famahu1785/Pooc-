@@ -108,6 +108,19 @@
       "problemMatcher": ["$gcc"],
       "dependsOn": "CMake: Configure"
     }
+    {
+      "label": "Build ParcialII",
+      "type": "shell",
+      "command": "cmake",
+      "args": [
+        "--build", "${workspaceFolder}/build",
+        "--target", "parcialII"
+        
+      ],
+      "group": "build",
+      "problemMatcher": ["$gcc"],
+      "dependsOn": "CMake: Configure"
+    }
       
   ]
 }
