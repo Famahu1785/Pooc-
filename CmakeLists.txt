@@ -13,6 +13,7 @@ add_subdirectory("punteros")
 add_subdirectory("notasArchivo")
 add_subdirectory("tallerLibreria")
 add_subdirectory("proyectoFin")
+add_subdirectory("parcialII")
 
 
 # cmake_minimum_required(VERSION 3.16)

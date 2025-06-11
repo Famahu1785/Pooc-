@@ -28,6 +28,10 @@
         "name": "ProyectoFin",
         "path": "proyectoFin"
       }
+      {
+        "name": "ParcialII",
+        "path": "parcialII"
+      }
     ],
     "settings": {
       // para que CMake Tools busque en la raíz
